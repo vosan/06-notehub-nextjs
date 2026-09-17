@@ -1,4 +1,4 @@
-import type { AxiosResponse } from 'axios';
+import axios, { type AxiosResponse } from 'axios';
 import type {
   FetchNotesParams,
   FetchNotesResponse,
@@ -23,6 +23,24 @@ export async function fetchNotes({
 export async function createNote(note: NewNote): Promise<Note> {
   const response: AxiosResponse<Note> = await api.post('/notes', note);
   return response.data;
+}
+
+export async function fetchNoteById(
+  id: Note['id'],
+  signal?: AbortSignal,
+): Promise<Note | null> {
+  try {
+    const response: AxiosResponse<Note | null> = await api.get(
+      `/notes/${encodeURIComponent(id)}`,
+      { signal },
+    );
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response?.status === 404) {
+      return null;
+    }
+    throw error;
+  }
 }
 
 export async function deleteNote(id: Note['id']): Promise<Note> {

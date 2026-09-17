@@ -64,7 +64,7 @@ export default function NotesClient() {
         <NoteList
           notes={notesQuery.data.notes}
           onDeleted={() => {
-            if (notesQuery.data.notes.length === 1 && page > 1)
+            if (notesQuery.data?.notes.length === 1 && page > 1)
               setPage(page - 1);
           }}
         />
