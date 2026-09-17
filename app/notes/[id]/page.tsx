@@ -5,8 +5,8 @@ import {
 } from '@tanstack/react-query';
 import { getErrorMessage } from '../../../lib/api';
 import { noteQueryOptions } from '../../../lib/queries';
-import NoteDetailsClient from '../NoteDetails.client';
-import css from '../NoteDetails.module.css';
+import NoteDetailsClient from './NoteDetails.client';
+import css from './NoteDetails.module.css';
 
 export const dynamic = 'force-dynamic';
 

@@ -17,7 +17,7 @@ The previous `VITE_NOTEHUB_TOKEN` variable is now `NEXT_PUBLIC_NOTEHUB_TOKEN`. R
 - `/notes`: paginated notes, debounced search, and a validated create-note modal. Notes can be deleted from their cards.
 - `/notes/[id]`: full title, tag, content, and creation date for a note.
 - `app/notes/page.tsx` and `app/notes/[id]/page.tsx`: request-time server components that prefetch TanStack Query data and hydrate the client cache.
-- `app/notes/Notes.client.tsx` and `app/notes/NoteDetails.client.tsx`: client query handling and rendering. Detail IDs come from `useParams()`.
+- `app/notes/Notes.client.tsx` and `app/notes/[id]/NoteDetails.client.tsx`: client query handling and rendering. Detail IDs come from `useParams()`.
 - `app/loading.tsx` and the two route-specific `error.tsx` files: loading and route error states.
 - `components/`: shared UI, CSS Modules, and the global `TanStackProvider`.
 - `types/note.ts`: shared note and API request/response types.
