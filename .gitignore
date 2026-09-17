@@ -28,3 +28,8 @@ dist-ssr
 !.env.example
 .vercel
 coverage
+
+# Next.js
+.next/
+out/
+*.tsbuildinfo
