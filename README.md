@@ -45,7 +45,7 @@ The existing tests have updated imports and environment variable names for the m
 1. Push your commits to [vosan/06-notehub-nextjs](https://github.com/vosan/06-notehub-nextjs).
 2. Import that repository into Vercel and select the **Next.js** framework preset with the repository root as the project root.
 3. Add `NEXT_PUBLIC_NOTEHUB_TOKEN` to the Vercel environments you intend to deploy (Production and, if needed, Preview).
-4. Keep the standard Next.js build and output settings. Remove any previous Vite override such as output directory `dist`.
+4. The repository's `vercel.json` selects Next.js, runs `npm run build`, and resets the output directory to the framework default. In Vercel's **Settings → Build and Deployment**, also select **Next.js** and turn off the **Output Directory** override if it still contains `dist` from the old Vite setup.
 5. Deploy. Changing a public environment variable requires a new deployment.
 6. Submit both the repository URL and the live Vercel URL. Wait at least five minutes after pushing changes before submitting the homework, as requested in the assignment.
 
