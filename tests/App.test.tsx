@@ -65,7 +65,7 @@ describe('NoteHub workflows', () => {
       name: 'Notes pages',
     });
     await user.click(
-      within(navigation).getByRole('button', { name: 'Page 2', exact: true }),
+      within(navigation).getByRole('button', { name: 'Page 2' }),
     );
     await waitFor(() =>
       expect(fetchNotes).toHaveBeenLastCalledWith(
@@ -114,9 +114,7 @@ describe('NoteHub workflows', () => {
     expect(container).not.toContainElement(dialog);
     expect(screen.getByLabelText('Title')).toHaveFocus();
     await user.tab({ shift: true });
-    expect(
-      screen.getByRole('button', { name: 'Create note', exact: true }),
-    ).toHaveFocus();
+    expect(screen.getByRole('button', { name: 'Create note' })).toHaveFocus();
     await user.tab();
     expect(screen.getByLabelText('Title')).toHaveFocus();
     await user.click(screen.getByLabelText('Content'));
@@ -140,7 +138,6 @@ describe('NoteHub workflows', () => {
     const title = screen.getByLabelText('Title');
     const submit = screen.getByRole('button', {
       name: 'Create note',
-      exact: true,
     });
     expect(screen.queryByText('Title is required')).not.toBeInTheDocument();
     await user.click(screen.getByLabelText('Content'));
@@ -201,9 +198,7 @@ describe('NoteHub workflows', () => {
     });
     await user.click(screen.getByRole('button', { name: 'Create note +' }));
     await user.type(screen.getByLabelText('Title'), 'New note');
-    await user.click(
-      screen.getByRole('button', { name: 'Create note', exact: true }),
-    );
+    await user.click(screen.getByRole('button', { name: 'Create note' }));
     await waitFor(() =>
       expect(createNote).toHaveBeenCalledWith(
         { title: 'New note', content: '', tag: 'Todo' },
@@ -226,16 +221,12 @@ describe('NoteHub workflows', () => {
     await user.click(screen.getByRole('button', { name: 'Create note +' }));
     await user.type(screen.getByLabelText('Title'), 'My draft');
     await user.selectOptions(screen.getByLabelText('Tag'), 'Personal');
-    await user.click(
-      screen.getByRole('button', { name: 'Create note', exact: true }),
-    );
+    await user.click(screen.getByRole('button', { name: 'Create note' }));
     expect(await screen.findByRole('alert')).toHaveTextContent(
       'Creation failed',
     );
     expect(screen.getByLabelText('Title')).toHaveValue('My draft');
-    await user.click(
-      screen.getByRole('button', { name: 'Create note', exact: true }),
-    );
+    await user.click(screen.getByRole('button', { name: 'Create note' }));
     await waitFor(() =>
       expect(screen.queryByRole('dialog')).not.toBeInTheDocument(),
     );
@@ -248,7 +239,7 @@ describe('NoteHub workflows', () => {
     await user.click(
       within(
         await screen.findByRole('navigation', { name: 'Notes pages' }),
-      ).getByRole('button', { name: 'Page 2', exact: true }),
+      ).getByRole('button', { name: 'Page 2' }),
     );
     await screen.findByRole('heading', { name: note.title });
     await waitFor(() =>

@@ -18,6 +18,6 @@ it('renders and changes pages when the package has a wrapped default export', as
     <Pagination totalPages={4} currentPage={1} onPageChange={onPageChange} />,
   );
 
-  await user.click(screen.getByRole('button', { name: 'Page 2', exact: true }));
+  await user.click(screen.getByRole('button', { name: 'Page 2' }));
   expect(onPageChange).toHaveBeenCalledWith(2);
 });
