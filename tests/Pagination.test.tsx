@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expect, it, vi } from 'vitest';
-import Pagination from '../src/components/Pagination/Pagination';
+import Pagination from '../components/Pagination/Pagination';
 
 // Reproduce the nested default export served by Vite's dependency optimizer.
 // The App tests separately cover the unwrapped export used by Vitest.

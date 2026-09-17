@@ -8,16 +8,12 @@ import {
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
-import App from '../src/components/App/App';
-import {
-  createNote,
-  deleteNote,
-  fetchNotes,
-} from '../src/services/noteService';
-import type { Note } from '../src/types/note';
+import App from '../app/notes/Notes.client';
+import { createNote, deleteNote, fetchNotes } from '../lib/api';
+import type { Note } from '../types/note';
 
-vi.mock('../src/services/noteService', async (importOriginal) => ({
-  ...(await importOriginal<typeof import('../src/services/noteService')>()),
+vi.mock('../lib/api', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('../lib/api')>()),
   fetchNotes: vi.fn(),
   createNote: vi.fn(),
   deleteNote: vi.fn(),

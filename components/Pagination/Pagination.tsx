@@ -1,7 +1,9 @@
+'use client';
+
 import ReactPaginateModule from 'react-paginate';
 import css from './Pagination.module.css';
 
-// The package's UMD export can retain a default wrapper in Vite's dev bundle.
+// Support the package's UMD export when a bundler retains a default wrapper.
 const ReactPaginate =
   (ReactPaginateModule as unknown as { default?: typeof ReactPaginateModule })
     .default ?? ReactPaginateModule;

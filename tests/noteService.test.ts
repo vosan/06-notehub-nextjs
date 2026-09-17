@@ -27,7 +27,7 @@ const adapter: AxiosAdapter = async (config) => {
 
 beforeEach(() => {
   vi.resetModules();
-  vi.stubEnv('VITE_NOTEHUB_TOKEN', 'test-token');
+  vi.stubEnv('NEXT_PUBLIC_NOTEHUB_TOKEN', 'test-token');
   requests = [];
   axios.defaults.adapter = adapter;
 });
@@ -39,7 +39,7 @@ afterEach(() => {
 
 describe('NoteHub API contract', () => {
   it('sends authorization, search, pagination, and a cancellation signal', async () => {
-    const { fetchNotes } = await import('../src/services/noteService');
+    const { fetchNotes } = await import('../lib/api');
     const signal = new AbortController().signal;
     expect(await fetchNotes({ page: 2, search: 'project', signal })).toEqual({
       notes: [note],
@@ -56,8 +56,7 @@ describe('NoteHub API contract', () => {
   });
 
   it('posts new notes and deletes by ID, returning the backend note', async () => {
-    const { createNote, deleteNote } =
-      await import('../src/services/noteService');
+    const { createNote, deleteNote } = await import('../lib/api');
     const draft = { title: 'API test', content: '', tag: 'Todo' as const };
     expect(await createNote(draft)).toEqual(note);
     expect(requests[0].method).toBe('post');
@@ -69,8 +68,8 @@ describe('NoteHub API contract', () => {
   });
 
   it('does not send a request when the token is missing', async () => {
-    vi.stubEnv('VITE_NOTEHUB_TOKEN', '');
-    const { fetchNotes } = await import('../src/services/noteService');
+    vi.stubEnv('NEXT_PUBLIC_NOTEHUB_TOKEN', '');
+    const { fetchNotes } = await import('../lib/api');
     await expect(fetchNotes({ page: 1 })).rejects.toThrow(
       'NoteHub is not configured',
     );
